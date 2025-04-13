@@ -90,12 +90,16 @@ class DropDownComponent extends HTMLComponent {
                 this.#menu.setSearchEngine(searchEngine);
                 return obj;
             },
-            setDisabled: (disabled: boolean) => {
-                this.#disabled.value = disabled;
+            setDisabled: (disabled: Refable<boolean> = true) => {
+                this.useListener(alwaysRef(disabled), (disabled) => {
+                    this.#disabled.value = disabled;
+                });
                 return obj;
             },
-            setInvalid: (invalid: boolean) => {
-                this.#invalid.value = invalid;
+            setInvalid: (invalid: Refable<boolean> = true) => {
+                this.useListener(alwaysRef(invalid), (invalid) => {
+                    this.#invalid.value = invalid;
+                });
                 return obj;
             },
             addAction: (title: Refable<string>, icon: Component, onClick: () => void) => {
