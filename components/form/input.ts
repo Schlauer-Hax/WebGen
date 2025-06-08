@@ -20,6 +20,10 @@ class InputComponent extends HTMLComponent {
         this.#input.classList.add("input");
         this.shadowRoot!.append(Box(alwaysRef(label).map(placeholder => placeholder ? Label(placeholder) : [])).addClass("label").draw(), this.#input);
 
+        this.addEventListener("click", (e) => {
+            this.#input.focus();
+        });
+
         this.useListener(alwaysRef(label), (text) => {
             if (text) {
                 this.ariaLabel = text;
